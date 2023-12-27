@@ -3072,8 +3072,10 @@ const initGit = async ({
 ;// CONCATENATED MODULE: ./src/parts/PublishBranch/PublishBranch.js
 
 
-const publishBranch = async ({ repositoryPath }) => {
-  await execa('git', ['push'], {
+
+const publishBranch = async ({ repositoryPath, version }) => {
+  const branchName = getBranchName(version)
+  await execa('git', ['push', '--set-upstream', 'origin', branchName], {
     cwd: repositoryPath,
   })
 }
@@ -3180,6 +3182,7 @@ const main = async () => {
   })
   await publishBranch({
     repositoryPath,
+    version
   })
   await createPullRequest({
     repositoryPath,

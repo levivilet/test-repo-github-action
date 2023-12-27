@@ -46,6 +46,7 @@ export const main = async () => {
   })
   await PublishBranch.publishBranch({
     repositoryPath,
+    version
   })
   await CreatePullRequest.createPullRequest({
     repositoryPath,
