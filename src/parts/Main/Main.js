@@ -11,7 +11,7 @@ export const main = async () => {
   const repoName = 'test-repo-a'
   const gitUserEmail = 'github-actions[bot]@users.noreply.github.com'
   const gitUserName = 'github-actions[bot]'
-  const repositoryPath = '/github/workspace/tmp-repository'
+  const repositoryPath = '/tmp/tmp-repository'
   const version =
     process.env.RG_VERSION || process.env.VERSION || 'unknown-version'
   await InitGit.initGit({
