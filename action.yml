@@ -1,14 +1,14 @@
-name: "Levivilet/Hello World"
-description: "This is a simple hello world action"
+name: 'Levivilet/Hello World'
+description: 'This is a simple hello world action'
 author: Le Vivilet
 branding:
-  icon: "activity"
-  color: "blue"
+  icon: 'activity'
+  color: 'blue'
 
 inputs:
-  custom-text:
-    description: "Custom text to echo"
-    required: true
+  token:
+    description: Token used to fetch the repository.
+    default: ${{ github.token }}
 
 runs:
   using: node20

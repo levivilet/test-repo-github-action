@@ -1,3 +1,4 @@
+import * as core from '@actions/core'
 import * as AddAll from '../AddAll/AddAll.js'
 import * as CreateBranch from '../CreateBranch/CreateBranch.js'
 import * as CreateCommit from '../CreateCommit/CreateCommit.js'
@@ -16,7 +17,7 @@ export const main = async () => {
   const filesPath = 'files.json'
   const version =
     process.env.RG_VERSION || process.env.VERSION || 'unknown-version'
-  const githubToken = process.env.GITHUB_TOKEN
+  const githubToken = core.getInput('token', { required: true })
   await DownloadRepository.downloadRepository({
     userName,
     repoName,
