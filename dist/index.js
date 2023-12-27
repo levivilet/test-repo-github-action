@@ -3041,10 +3041,11 @@ const downloadRepository = async ({
   userName,
   repoName,
   repositoryPath,
+  serviceUrl
 }) => {
   await execa('git', [
     'clone',
-    `git@github.com:${userName}/${repoName}.git`,
+    `${serviceUrl}/${userName}/${repoName}`,
     repositoryPath,
   ])
 }
@@ -3124,6 +3125,7 @@ const updateRepository = async ({ repositoryPath, version }) => {
 
 
 const main = async () => {
+  const serviceUrl='https://github.com'
   const userName = 'levivilet'
   const repoName = 'test-repo-a'
   const gitUserEmail = 'github-actions[bot]@users.noreply.github.com'
@@ -3139,6 +3141,7 @@ const main = async () => {
     userName,
     repoName,
     repositoryPath,
+    serviceUrl
   })
   await createBranch({
     repositoryPath,
