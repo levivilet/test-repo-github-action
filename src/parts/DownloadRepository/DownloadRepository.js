@@ -1,12 +1,12 @@
-import { execa } from 'execa'
+import * as Exec from '../Exec/Exec.js'
 
 export const downloadRepository = async ({
   userName,
   repoName,
   repositoryPath,
-  serviceUrl
+  serviceUrl,
 }) => {
-  await execa('git', [
+  await Exec.exec('git', [
     'clone',
     `${serviceUrl}/${userName}/${repoName}`,
     repositoryPath,
