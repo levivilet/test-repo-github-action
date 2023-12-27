@@ -17,9 +17,9 @@ const getNewValue = (oldValue, version) => {
 export const updateRepository = async ({
   repositoryPath,
   version,
-  filePath,
+  filesPath,
 }) => {
-  const filesJsonPath = join(repositoryPath, filePath)
+  const filesJsonPath = join(repositoryPath, filesPath)
   const oldValue = await JsonFile.readJson(filesJsonPath)
   const newValue = getNewValue(oldValue, version)
   await JsonFile.writeJson(filesJsonPath, newValue)
