@@ -4,11 +4,11 @@ export const downloadRepository = async ({
   userName,
   repoName,
   repositoryPath,
-  serviceUrl,
+  githubToken,
 }) => {
   await Exec.exec('git', [
     'clone',
-    `${serviceUrl}/${userName}/${repoName}`,
+    `https://${githubToken}@github.com/${userName}/${repoName}.git`,
     repositoryPath,
   ])
 }

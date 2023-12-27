@@ -2994,6 +2994,15 @@ function execaNode(scriptPath, args, options = {}) {
 ;// CONCATENATED MODULE: ./src/parts/Exec/Exec.js
 
 
+;// CONCATENATED MODULE: ./src/parts/AddAll/AddAll.js
+
+
+const addAll = async ({ repositoryPath }) => {
+  await execa('git', ['add', '.'], {
+    cwd: repositoryPath,
+  })
+}
+
 ;// CONCATENATED MODULE: ./src/parts/GetBranchName/GetBranchName.js
 const getBranchName = (version) => {
   const branchName = `feature/update-version-${version}`
@@ -3044,11 +3053,11 @@ const downloadRepository = async ({
   userName,
   repoName,
   repositoryPath,
-  serviceUrl,
+  githubToken,
 }) => {
   await execa('git', [
     'clone',
-    `${serviceUrl}/${userName}/${repoName}`,
+    `https://${githubToken}@github.com/${userName}/${repoName}.git`,
     repositoryPath,
   ])
 }
@@ -3124,15 +3133,6 @@ const updateRepository = async ({
   await writeJson(filesJsonPath, newValue)
 }
 
-;// CONCATENATED MODULE: ./src/parts/AddAll/AddAll.js
-
-
-const addAll = async ({ repositoryPath }) => {
-  await execa('git', ['add', '.'], {
-    cwd: repositoryPath,
-  })
-}
-
 ;// CONCATENATED MODULE: ./src/parts/Main/Main.js
 
 
@@ -3144,7 +3144,6 @@ const addAll = async ({ repositoryPath }) => {
 
 
 const main = async () => {
-  const serviceUrl = 'https://github.com'
   const userName = 'levivilet'
   const repoName = 'test-repo-a'
   const gitUserEmail = 'github-actions[bot]@users.noreply.github.com'
@@ -3153,11 +3152,12 @@ const main = async () => {
   const filesPath = 'files.json'
   const version =
     process.env.RG_VERSION || process.env.VERSION || 'unknown-version'
+  const githubToken = process.env.GITHUB_TOKEN
   await downloadRepository({
     userName,
     repoName,
     repositoryPath,
-    serviceUrl,
+    githubToken,
   })
   await initGit({
     gitUserEmail,
@@ -3182,7 +3182,7 @@ const main = async () => {
   })
   await publishBranch({
     repositoryPath,
-    version
+    version,
   })
   await createPullRequest({
     repositoryPath,
