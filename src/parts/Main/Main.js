@@ -10,7 +10,7 @@ import * as UpdateRepository from '../UpdateRepository/UpdateRepository.js'
 
 export const main = async () => {
   const userName = 'levivilet'
-  const repoName = 'test-repo-b'
+  const repoName = 'test-repo-a'
   const gitUserEmail = 'github-actions[bot]@users.noreply.github.com'
   const gitUserName = 'github-actions[bot]'
   const repositoryPath = '/tmp/tmp-repository'
