@@ -29409,7 +29409,7 @@ const createBranch = async ({ repositoryPath, version }) => {
 }
 
 ;// CONCATENATED MODULE: ./src/parts/GetCommitMessage/GetCommitMessage.js
-const getCommitMessage = ({ version }) => {
+const getCommitMessage = (version) => {
   const commitMessage = `Update to version ${version}`
   return commitMessage
 }
