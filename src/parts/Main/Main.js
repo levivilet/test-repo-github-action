@@ -7,12 +7,13 @@ import * as PublishBranch from '../PublishBranch/PublishBranch.js'
 import * as UpdateRepository from '../UpdateRepository/UpdateRepository.js'
 
 export const main = async () => {
-  const serviceUrl='https://github.com'
+  const serviceUrl = 'https://github.com'
   const userName = 'levivilet'
   const repoName = 'test-repo-a'
   const gitUserEmail = 'github-actions[bot]@users.noreply.github.com'
   const gitUserName = 'github-actions[bot]'
   const repositoryPath = '/tmp/tmp-repository'
+  const filesPath = 'files.json'
   const version =
     process.env.RG_VERSION || process.env.VERSION || 'unknown-version'
   await InitGit.initGit({
@@ -23,7 +24,7 @@ export const main = async () => {
     userName,
     repoName,
     repositoryPath,
-    serviceUrl
+    serviceUrl,
   })
   await CreateBranch.createBranch({
     repositoryPath,
@@ -32,6 +33,7 @@ export const main = async () => {
   await UpdateRepository.updateRepository({
     repositoryPath,
     version,
+    filesPath,
   })
   await CreateCommit.createCommit({
     repositoryPath,
