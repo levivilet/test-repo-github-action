@@ -16,15 +16,16 @@ export const main = async () => {
   const filesPath = 'files.json'
   const version =
     process.env.RG_VERSION || process.env.VERSION || 'unknown-version'
-  await InitGit.initGit({
-    gitUserEmail,
-    gitUserName,
-  })
   await DownloadRepository.downloadRepository({
     userName,
     repoName,
     repositoryPath,
     serviceUrl,
+  })
+  await InitGit.initGit({
+    gitUserEmail,
+    gitUserName,
+    repositoryPath,
   })
   await CreateBranch.createBranch({
     repositoryPath,
