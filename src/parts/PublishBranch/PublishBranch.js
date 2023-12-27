@@ -1,7 +1,7 @@
-import { execa } from 'execa'
+import * as Exec from '../Exec/Exec.js'
 
 export const publishBranch = async ({ repositoryPath }) => {
-  await execa('git', ['push'], {
+  await Exec.exec('git', ['push'], {
     cwd: repositoryPath,
   })
 }

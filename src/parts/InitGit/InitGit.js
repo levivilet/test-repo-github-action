@@ -1,14 +1,14 @@
-import { execa } from 'execa'
+import * as Exec from '../Exec/Exec.js'
 
 export const initGit = async ({
   gitUserEmail,
   gitUserName,
   repositoryPath,
 }) => {
-  await execa('git', ['config', 'user.email', gitUserEmail], {
+  await Exec.exec('git', ['config', 'user.email', gitUserEmail], {
     cwd: repositoryPath,
   })
-  await execa('git', ['config', 'user.name', gitUserName], {
+  await Exec.exec('git', ['config', 'user.name', gitUserName], {
     cwd: repositoryPath,
   })
 }

@@ -2991,6 +2991,9 @@ function execaNode(scriptPath, args, options = {}) {
 	);
 }
 
+;// CONCATENATED MODULE: ./src/parts/Exec/Exec.js
+
+
 ;// CONCATENATED MODULE: ./src/parts/GetBranchName/GetBranchName.js
 const getBranchName = (version) => {
   const branchName = `feature/update-version-${version}`
@@ -3041,7 +3044,7 @@ const downloadRepository = async ({
   userName,
   repoName,
   repositoryPath,
-  serviceUrl
+  serviceUrl,
 }) => {
   await execa('git', [
     'clone',
