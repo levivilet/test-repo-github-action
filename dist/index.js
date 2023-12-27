@@ -3122,7 +3122,17 @@ const updateRepository = async ({
   await writeJson(filesJsonPath, newValue)
 }
 
+;// CONCATENATED MODULE: ./src/parts/AddAll/AddAll.js
+
+
+const addAll = async ({ repositoryPath }) => {
+  await execa('git', ['add', '.'], {
+    cwd: repositoryPath,
+  })
+}
+
 ;// CONCATENATED MODULE: ./src/parts/Main/Main.js
+
 
 
 
@@ -3160,6 +3170,9 @@ const main = async () => {
     repositoryPath,
     version,
     filesPath,
+  })
+  await addAll({
+    repositoryPath,
   })
   await createCommit({
     repositoryPath,

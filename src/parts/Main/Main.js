@@ -5,6 +5,7 @@ import * as DownloadRepository from '../DownloadRepository/DownloadRepository.js
 import * as InitGit from '../InitGit/InitGit.js'
 import * as PublishBranch from '../PublishBranch/PublishBranch.js'
 import * as UpdateRepository from '../UpdateRepository/UpdateRepository.js'
+import * as AddAll from '../AddAll/AddAll.js'
 
 export const main = async () => {
   const serviceUrl = 'https://github.com'
@@ -35,6 +36,9 @@ export const main = async () => {
     repositoryPath,
     version,
     filesPath,
+  })
+  await AddAll.addAll({
+    repositoryPath,
   })
   await CreateCommit.createCommit({
     repositoryPath,
