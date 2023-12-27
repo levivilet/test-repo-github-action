@@ -3053,18 +3053,18 @@ const downloadRepository = async ({
 ;// CONCATENATED MODULE: ./src/parts/InitGit/InitGit.js
 
 
-const initGit = async ({ gitUserEmail, gitUserName }) => {
-  await execa("git", [
-    "config",
-    "--global",
-    "--add",
-    "safe.directory",
-    "/github/workspace",
-  ]);
-  await execa("git", ["config", "user.email", gitUserEmail]);
-  await execa("git", ["config", "user.name", gitUserName]);
-  await execa("git", ["fetch", "origin", "--prune"]);
-};
+const initGit = async ({
+  gitUserEmail,
+  gitUserName,
+  repositoryPath,
+}) => {
+  await execa('git', ['config', 'user.email', gitUserEmail], {
+    cwd: repositoryPath,
+  })
+  await execa('git', ['config', 'user.name', gitUserName], {
+    cwd: repositoryPath,
+  })
+}
 
 ;// CONCATENATED MODULE: ./src/parts/PublishBranch/PublishBranch.js
 
@@ -3138,15 +3138,16 @@ const main = async () => {
   const filesPath = 'files.json'
   const version =
     process.env.RG_VERSION || process.env.VERSION || 'unknown-version'
-  await initGit({
-    gitUserEmail,
-    gitUserName,
-  })
   await downloadRepository({
     userName,
     repoName,
     repositoryPath,
     serviceUrl,
+  })
+  await initGit({
+    gitUserEmail,
+    gitUserName,
+    repositoryPath,
   })
   await createBranch({
     repositoryPath,
