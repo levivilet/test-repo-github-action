@@ -7,6 +7,7 @@ import * as PublishBranch from '../PublishBranch/PublishBranch.js'
 import * as UpdateRepository from '../UpdateRepository/UpdateRepository.js'
 
 export const main = async () => {
+  const serviceUrl='https://github.com'
   const userName = 'levivilet'
   const repoName = 'test-repo-a'
   const gitUserEmail = 'github-actions[bot]@users.noreply.github.com'
@@ -22,6 +23,7 @@ export const main = async () => {
     userName,
     repoName,
     repositoryPath,
+    serviceUrl
   })
   await CreateBranch.createBranch({
     repositoryPath,
