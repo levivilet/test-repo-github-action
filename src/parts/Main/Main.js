@@ -1,3 +1,4 @@
+import * as AddAll from '../AddAll/AddAll.js'
 import * as CreateBranch from '../CreateBranch/CreateBranch.js'
 import * as CreateCommit from '../CreateCommit/CreateCommit.js'
 import * as CreatePullRequest from '../CreatePullRequest/CreatePullRequest.js'
@@ -5,10 +6,8 @@ import * as DownloadRepository from '../DownloadRepository/DownloadRepository.js
 import * as InitGit from '../InitGit/InitGit.js'
 import * as PublishBranch from '../PublishBranch/PublishBranch.js'
 import * as UpdateRepository from '../UpdateRepository/UpdateRepository.js'
-import * as AddAll from '../AddAll/AddAll.js'
 
 export const main = async () => {
-  const serviceUrl = 'https://github.com'
   const userName = 'levivilet'
   const repoName = 'test-repo-a'
   const gitUserEmail = 'github-actions[bot]@users.noreply.github.com'
@@ -17,11 +16,12 @@ export const main = async () => {
   const filesPath = 'files.json'
   const version =
     process.env.RG_VERSION || process.env.VERSION || 'unknown-version'
+  const githubToken = process.env.GITHUB_TOKEN
   await DownloadRepository.downloadRepository({
     userName,
     repoName,
     repositoryPath,
-    serviceUrl,
+    githubToken,
   })
   await InitGit.initGit({
     gitUserEmail,
@@ -46,7 +46,7 @@ export const main = async () => {
   })
   await PublishBranch.publishBranch({
     repositoryPath,
-    version
+    version,
   })
   await CreatePullRequest.createPullRequest({
     repositoryPath,
