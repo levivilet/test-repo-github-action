@@ -3108,8 +3108,12 @@ const getNewValue = (oldValue, version) => {
   return newItems
 }
 
-const updateRepository = async ({ repositoryPath, version }) => {
-  const filesJsonPath = (0,external_path_.join)(repositoryPath, 'file.json')
+const updateRepository = async ({
+  repositoryPath,
+  version,
+  filePath,
+}) => {
+  const filesJsonPath = (0,external_path_.join)(repositoryPath, filePath)
   const oldValue = await readJson(filesJsonPath)
   const newValue = getNewValue(oldValue, version)
   await writeJson(filesJsonPath, newValue)
@@ -3125,12 +3129,13 @@ const updateRepository = async ({ repositoryPath, version }) => {
 
 
 const main = async () => {
-  const serviceUrl='https://github.com'
+  const serviceUrl = 'https://github.com'
   const userName = 'levivilet'
   const repoName = 'test-repo-a'
   const gitUserEmail = 'github-actions[bot]@users.noreply.github.com'
   const gitUserName = 'github-actions[bot]'
   const repositoryPath = '/tmp/tmp-repository'
+  const filesPath = 'files.json'
   const version =
     process.env.RG_VERSION || process.env.VERSION || 'unknown-version'
   await initGit({
@@ -3141,7 +3146,7 @@ const main = async () => {
     userName,
     repoName,
     repositoryPath,
-    serviceUrl
+    serviceUrl,
   })
   await createBranch({
     repositoryPath,
@@ -3150,6 +3155,7 @@ const main = async () => {
   await updateRepository({
     repositoryPath,
     version,
+    filesPath,
   })
   await createCommit({
     repositoryPath,
