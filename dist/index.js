@@ -3111,9 +3111,9 @@ const getNewValue = (oldValue, version) => {
 const updateRepository = async ({
   repositoryPath,
   version,
-  filePath,
+  filesPath,
 }) => {
-  const filesJsonPath = (0,external_path_.join)(repositoryPath, filePath)
+  const filesJsonPath = (0,external_path_.join)(repositoryPath, filesPath)
   const oldValue = await readJson(filesJsonPath)
   const newValue = getNewValue(oldValue, version)
   await writeJson(filesJsonPath, newValue)
